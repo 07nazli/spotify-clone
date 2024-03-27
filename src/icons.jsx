@@ -68,6 +68,15 @@ const NextIcon = ({size}) => {
 	)
 }
 
+const DownDirIcon = ({size}) => {
+	return (
+		<svg viewBox="0 0 16 16" width={size} height={size} xmlns="http://www.w3.org/2000/svg">
+			<path fill="currentColor" d="M3 6l5 5.794L13 6z"/>
+		</svg>
+	)
+}
+
+
 const Icon = ({ name, size = 24 }) => {
     const icons = {
         home: HomeIcon,
@@ -78,6 +87,7 @@ const Icon = ({ name, size = 24 }) => {
 		download: DownloadIcon,
 		prev: PrevIcon,
 		next: NextIcon,
+		downDir: DownDirIcon,
     }
 
     const Component = icons[name]
