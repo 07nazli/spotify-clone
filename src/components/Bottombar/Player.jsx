@@ -12,7 +12,7 @@ function Player() {
     const [values, setValues] = useState([50])
 
     const [audio, state, controls, ref] = useAudio({
-        src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'
+        src: 'https://youtu.be/_lVWt2fDCas'
       });
 
   return (
