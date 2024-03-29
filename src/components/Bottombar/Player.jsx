@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Icon } from "../../icons"
 import { Range, getTrackBackground } from "react-range";
+import {useAudio} from 'react-use';
+import { secondsToTime } from "../../utils";
 
 function Player() {
 
@@ -8,6 +10,10 @@ function Player() {
     const MIN = 0;
     const MAX = 100;
     const [values, setValues] = useState([50])
+
+    const [audio, state, controls, ref] = useAudio({
+        src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'
+      });
 
   return (
     <div className="flex px-4 justify-between items-center h-full">
@@ -23,7 +29,9 @@ function Player() {
             <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100">
                 <Icon size={16} name="playerPrev" />
             </button>
-            <button className="w-8 h-8 flex bg-white items-center justify-center text-black rounded-full hover:scale-[1.06]">
+            <button 
+            onClick={controls.play}
+            className="w-8 h-8 flex bg-white items-center justify-center text-black rounded-full hover:scale-[1.06]">
                 <Icon size={16} name="play" />
             </button>
             <button className="w-8 h-8 flex items-center justify-center text-white text-opacity-70 hover:text-opacity-100">
@@ -33,13 +41,17 @@ function Player() {
                 <Icon size={16} name="repeat"/>
             </button>
         </div>
-        <div className="w-full">
+        <div className="w-full flex items-center gap-x-2">
+            {audio}
+            <div className="text-[0.688rem] text-white text-opacity-70">
+                {secondsToTime(state?.time)}
+            </div>
             <Range
                 values={values}
                 step={STEP}
                 min={MIN}
                 max={MAX}
-                onChange={(values) => setValues(values)}
+                onChange={(values) => controls.seek(values[0])}
                 renderTrack={({ props, children }) => (
                     <div
                     onMouseDown={props.onMouseDown}
@@ -74,6 +86,9 @@ function Player() {
                     />
                 )}
             />
+            <div className="text-[0.688rem] text-white text-opacity-70">
+                {secondsToTime(state?.duration)}
+            </div>
         </div>
       </div>
 
