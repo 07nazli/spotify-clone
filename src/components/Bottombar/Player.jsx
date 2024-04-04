@@ -2,13 +2,26 @@ import { Icon } from "../../icons"
 import {useAudio} from 'react-use';
 import { secondsToTime } from "../../utils";
 import CustomRange from "../CustomRange";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setControls } from "../../stores/player";
 
 function Player() {
 
+    const dispatch = useDispatch()
+   const { current } = useSelector(state => state.player)
+
     const [audio, state, controls, ref] = useAudio({
-        src: 'https://cdn.freesound.org/previews/560/560448_12295155-lq.mp3'
+        src: current?.src
       });
+
+    useEffect(() => {
+        controls.play()
+    }, [current])
+
+    useEffect(() => {
+        dispatch(setControls(controls))
+    }, [])
 
     const volumeIcon = useMemo(() => {
         if(state.volume === 0 || state.muted)
@@ -22,8 +35,14 @@ function Player() {
 
   return (
     <div className="flex px-4 justify-between items-center h-full">
-      <div className="min-w-[11.25rem] w-[30%]">
-        sol
+      <div className="min-w-[11.25rem] w-[30%] flex items-center">
+        <div className="flex items-center">
+            {current && (
+                <div className="w-14 h-14">
+                    <img src={current.image} alt="" />
+                </div>
+            )}
+        </div>
       </div>
 
       <div className="max-w-[45.125rem] w-[40%] flex flex-col items-center">
