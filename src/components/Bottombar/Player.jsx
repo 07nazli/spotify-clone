@@ -7,7 +7,7 @@ import { useMemo } from "react";
 function Player() {
 
     const [audio, state, controls, ref] = useAudio({
-        src: 'https://cdn.freesound.org/previews/730/730249_1015240-lq.mp3'
+        src: 'https://cdn.freesound.org/previews/560/560448_12295155-lq.mp3'
       });
 
     const volumeIcon = useMemo(() => {
