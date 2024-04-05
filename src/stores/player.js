@@ -4,6 +4,7 @@ const initialState = {
   current: false,
   controls: false,
   playing: false,
+  sidebar: false,
 };
 
 export const playerSlice = createSlice({
@@ -19,10 +20,14 @@ export const playerSlice = createSlice({
     setPlaying: (state, action) => {
       state.playing = action.payload;
     },
+    setSidebar: (state, action) => {
+      state.sidebar = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setControls, setCurrent, setPlaying } = playerSlice.actions;
+export const { setControls, setCurrent, setPlaying, setSidebar } =
+  playerSlice.actions;
 
 export default playerSlice.reducer;
