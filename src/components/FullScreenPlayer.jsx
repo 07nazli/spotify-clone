@@ -9,7 +9,21 @@ function FullScreenPlayer({ toggle, state, controls, volumeIcon }) {
 
     return (
         <div className="h-full relative">
-            <div className="absolute inset-0 object-cover bg-center bg-cover blur-md opacity-30" style={{backgroundImage: `url(${current.image})`}}></div>
+            <div className="absolute inset-0 object-cover bg-center bg-cover blur-md opacity-30" style={{backgroundImage: `url(${current.image})`}} />
+            <div className="absolute opacity-70 top-14 left-8 gap-x-4 text-white flex items-center">
+                <Icon size={34} name="logo" />
+                <div className="text-xs ">
+                    <p style={{fontSize: 11}}>PLAYING FROM PLAYLIST</p>
+                    <h6 className="font-semibold mt-0.5">{current.title}</h6>
+                </div>
+            </div>
+            <div className="absolute left-8 bottom-36 flex items-center gap-x-5">
+                <img src={current.image} alt="" className="w-24 h-24 object-cover" />
+                <div className="self-end">
+                    <h3 className="text-3xl font-bold">{current.title}</h3>
+                    <p className="text-sm font-medium opacity-50">{current.description}</p>
+                </div>
+            </div>
             <div className="w-full absolute bottom-4 flex flex-col px-8 items-center">
                 <div className="w-full flex items-center mb-1.5 gap-x-2">
                     <div className="text-[0.688rem] text-white text-opacity-70">
